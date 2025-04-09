@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>PCOS Predictor</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+<div class="container mt-5">
+  <div class="card shadow p-4">
+    <h2 class="mb-4 text-center">PCOS Risk Predictor</h2>
+    <form action="/predict" method="post">
+      <!-- Numeric Inputs -->
+      <div class="mb-3">
+        <label class="form-label">Age</label>
+        <input type="number" step="0.1" class="form-control" name="Age" required>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Weight</label>
+        <input type="number" step="0.1" class="form-control" name="Weight" required>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Height</label>
+        <input type="number" step="0.1" class="form-control" name="Height" required>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">BMI</label>
+        <input type="number" step="0.1" class="form-control" name="BMI" required>
+      </div>
+
+      <!-- Categorical Inputs with Selection Boxes -->
+      <div class="mb-3">
+        <label class="form-label">Menstrual Regularity</label>
+        <select class="form-select" name="Menstrual_Regularity" required>
+          <option value="">--Select--</option>
+          <option value="regular">Regular</option>
+          <option value="irregular">Irregular</option>
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Menstrual Cycle Length</label>
+        <select class="form-select" name="Menstrual_Cycle_Length" required>
+          <option value="">--Select--</option>
+          <option value="normal">Normal</option>
+          <option value="irregular">Irregular</option>
+          <option value="long">Long</option>
+          <option value="verylong">Very Long</option>
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Irregular Periods</label>
+        <select class="form-select" name="Irregular_Periods" required>
+          <option value="">--Select--</option>
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Family History PCOS</label>
+        <select class="form-select" name="Family_History_PCOS" required>
+          <option value="">--Select--</option>
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Excessive Hair Growth</label>
+        <select class="form-select" name="Excessive_Hair_Growth" required>
+          <option value="">--Select--</option>
+          <option value="mild">Mild</option>
+          <option value="moderate">Moderate</option>
+          <option value="severe">Severe</option>
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Acne Severity</label>
+        <select class="form-select" name="Acne_Severity" required>
+          <option value="">--Select--</option>
+          <option value="mild">Mild</option>
+          <option value="moderate">Moderate</option>
+          <option value="severe">Severe</option>
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Hair Loss</label>
+        <select class="form-select" name="Hair_Loss" required>
+          <option value="">--Select--</option>
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Dark Patches</label>
+        <select class="form-select" name="Dark_Patches" required>
+          <option value="">--Select--</option>
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Fatigue</label>
+        <select class="form-select" name="Fatigue" required>
+          <option value="">--Select--</option>
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Mood Swings</label>
+        <select class="form-select" name="Mood_Swings" required>
+          <option value="">--Select--</option>
+          <option value="sometimes">Sometimes</option>
+          <option value="often">Often</option>
+          <option value="rarely">Rarely</option>
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Weight Gain</label>
+        <select class="form-select" name="Weight_Gain" required>
+          <option value="">--Select--</option>
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Fast Food Frequency</label>
+        <select class="form-select" name="Fast_Food_Frequency" required>
+          <option value="">--Select--</option>
+          <option value="ocassionaly">Ocassionaly</option>
+          <option value="rarely">Rarely</option>
+          <option value="frequently">Frequently</option>
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Exercise Days</label>
+        <select class="form-select" name="Exercise_Days" required>
+          <option value="">--Select--</option>
+          <option value="never">Never</option>
+          <option value="frequently">Frequently</option>
+          <option value="daily">Daily</option>
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Stress Level</label>
+        <select class="form-select" name="Stress_Level" required>
+          <option value="">--Select--</option>
+          <option value="high">High</option>
+          <option value="medium">Medium</option>
+          <option value="low">Low</option>
+        </select>
+      </div>
+
+      <button type="submit" class="btn btn-primary w-100 mt-3">Predict</button>
+    </form>
+  </div>
+</div>
+
+<!-- Bootstrap JS Bundle (optional) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
