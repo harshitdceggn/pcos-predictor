@@ -4,13 +4,12 @@ import pickle
 
 app = Flask(__name__)
 
-# Load the bundle containing the preprocessor, model, and columns
 with open('model.pkl', 'rb') as f:
     bundle = pickle.load(f)
 
 preprocessor = bundle['preprocessor']
 model = bundle['model']
-columns = bundle['columns']  # This is the list of feature names after preprocessing
+columns = bundle['columns'] 
 
 @app.route('/')
 def home():
@@ -18,8 +17,6 @@ def home():
 
 @app.route('/predict', methods=['POST'])
 def predict():
-    # Get form data from the HTML form submission.
-    # The following dictionary should include the raw input values.
     data = {
         'Age': float(request.form['Age']),
         'Weight': float(request.form['Weight']),
@@ -41,16 +38,10 @@ def predict():
         'Stress_Level': request.form['Stress_Level']
     }
 
-    # Create a DataFrame from the raw input.
-    # The DataFrame here must have the same columns as your training dataframe BEFORE preprocessing.
-    # Since the preprocessor handles all necessary transformation including one-hot encoding,
-    # we send this raw DataFrame to the preprocessor.
     input_df = pd.DataFrame([data])
 
-    # Apply the preprocessor to transform the input data.
     input_encoded = preprocessor.transform(input_df)
 
-    # The transformed input should now have 35 features matching what the model expects.
     prediction = model.predict(input_encoded)[0]
     probability = model.predict_proba(input_encoded)[0, 1] * 100
 
